@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Foode — Tips</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar">
+      <div class="brand">foode</div>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="food.html">Login</a>
+        <a href="recipes.html">All Recipes</a>
+        <a href="tips.html">Tips</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark and light mode">🌙</button>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <section class="section recipe-section">
+      <div class="section-header">
+        <h1>Tips</h1>
+        <p>These cooking tips are designed to help you get better results across every recipe.</p>
+      </div>
+
+      <h2>Quick Tips</h2>
+      <ul>
+        <li>Use fresh herbs and spices for authentic flavor.</li>
+        <li>Traditional recipes can have regional variations.</li>
+        <li>Serve with local breads, salads or sauces for better taste.</li>
+        <li>Adjust spice level according to your preference.</li>
+      </ul>
+
+      <h2>Common Tips for All Recipes</h2>
+      <ol>
+        <li>Wash all vegetables, meat and rice properly before cooking.</li>
+        <li>Use fresh ingredients for better taste and smell.</li>
+        <li>Prepare and measure ingredients before starting.</li>
+        <li>Marinate meat for extra flavor and softness.</li>
+        <li>Cook on medium flame to avoid burning.</li>
+        <li>Stir food regularly while cooking.</li>
+        <li>Add spices slowly and taste while cooking.</li>
+        <li>Use enough water while boiling rice or pasta.</li>
+        <li>Keep kitchen tools and hands clean.</li>
+        <li>Garnish with herbs, nuts or sauces for better presentation.</li>
+        <li>Serve food hot for best taste.</li>
+        <li>Store leftover food in refrigerator properly.</li>
+        <li>Follow cooking time carefully.</li>
+        <li>Use oil or butter in correct quantity.</li>
+        <li>Practice regularly to improve cooking skills.</li>
+      </ol>
+    </section>
+  </main>
+
+    <script>
+    (function() {
+      if (localStorage.getItem('loggedIn') !== '1') { window.location.href = 'food.html'; return; }
+      const html = document.documentElement;
+      const toggle = document.getElementById('theme-toggle');
+      const storedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      function setTheme(theme) {
+        html.classList.remove('theme-light', 'theme-dark');
+        html.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
+        toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        localStorage.setItem('theme', theme);
+      }
+
+      const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
+      setTheme(initialTheme);
+
+      toggle.addEventListener('click', function() {
+        const nextTheme = html.classList.contains('theme-dark') ? 'light' : 'dark';
+        setTheme(nextTheme);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Foode — Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar">
+      <div class="brand">foode</div>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="food.html">Login</a>
+        <a href="recipes.html">All Recipes</a>
+        <a href="tips.html">Tips</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark and light mode">🌙</button>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <div class="login-page">
+      <section class="login-card">
+        <p class="eyebrow">Member access</p>
+        <p class="login-note">Login first, then see the recipes.</p>
+        <h1>Sign in to your account</h1>
+        <p class="hero-text">Use your email and password to access the recipe collection.</p>
+
+        <form id="login-form">
+          <label class="form-field">
+            <span>Email address</span>
+            <input type="email" name="email" required placeholder="you@example.com" />
+          </label>
+
+          <label class="form-field">
+            <span>Password</span>
+            <input type="password" name="password" required placeholder="••••••••" />
+          </label>
+
+          <div class="form-options">
+            <label><input type="checkbox" name="remember" /> Remember me</label>
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn">Login</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      const html = document.documentElement;
+      const toggle = document.getElementById('theme-toggle');
+      const storedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const form = document.getElementById('login-form');
+
+      function setTheme(theme) {
+        html.classList.remove('theme-light', 'theme-dark');
+        html.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
+        toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        localStorage.setItem('theme', theme);
+      }
+
+      const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
+      setTheme(initialTheme);
+
+      toggle.addEventListener('click', function() {
+        const nextTheme = html.classList.contains('theme-dark') ? 'light' : 'dark';
+        setTheme(nextTheme);
+      });
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        localStorage.setItem('loggedIn', '1');
+        window.location.href = 'recipes.html';
+      });
+    })();
+  </script>
+</body>
+</html>
